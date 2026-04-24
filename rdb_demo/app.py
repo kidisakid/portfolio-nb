@@ -81,9 +81,29 @@ STUBBED_OPS = {
 # ── Styles ─────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-  /* hide the default streamlit header/menu + footer when embedded */
-  #MainMenu, footer, header[data-testid="stHeader"] { display: none !important; }
+  /* Hide menu + footer + deploy button, but KEEP the header in the DOM
+     so the "expand sidebar" button that appears after collapse stays
+     clickable. We just make the header transparent + non-blocking. */
+  #MainMenu, footer { display: none !important; }
   .stAppDeployButton { display: none !important; }
+  header[data-testid="stHeader"] {
+    background: transparent !important;
+    box-shadow: none !important;
+    height: 0 !important;
+  }
+  /* Keep the collapsed-sidebar re-open chevron visible and on top */
+  [data-testid="stSidebarCollapsedControl"],
+  button[data-testid="stBaseButton-headerNoPadding"],
+  button[kind="headerNoPadding"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999 !important;
+    background: var(--elev, #232716) !important;
+    border: 1px solid var(--line, rgba(243,236,212,0.12)) !important;
+    color: var(--ink, #f3ecd4) !important;
+    border-radius: 8px !important;
+  }
 
   /* palette aligned with the portfolio */
   :root {
