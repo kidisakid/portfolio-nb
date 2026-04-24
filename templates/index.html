@@ -38,6 +38,37 @@
     <div class="hero-bg-layer hero-bg-far" data-parallax-speed="0.15"></div>
     <div class="hero-bg-layer hero-bg-mid" data-parallax-speed="0.35"></div>
 
+    <svg class="hero-nodes" data-parallax-speed="0.25" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#d4b73d" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#d4b73d" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g stroke="rgba(243,236,212,0.1)" stroke-width="0.6" fill="none">
+        <path d="M120,140 L280,260 L460,180 L640,340 L820,220 L1000,380"/>
+        <path d="M100,480 L260,620 L440,540 L620,680 L800,560 L980,700"/>
+        <path d="M280,260 L260,620"/>
+        <path d="M460,180 L440,540"/>
+        <path d="M640,340 L620,680"/>
+        <path d="M820,220 L800,560"/>
+      </g>
+      <g fill="url(#nodeGlow)">
+        <circle cx="120" cy="140" r="3"/>
+        <circle cx="280" cy="260" r="2.5"/>
+        <circle cx="460" cy="180" r="3"/>
+        <circle cx="640" cy="340" r="2.5"/>
+        <circle cx="820" cy="220" r="3"/>
+        <circle cx="1000" cy="380" r="2.5"/>
+        <circle cx="100" cy="480" r="2.5"/>
+        <circle cx="260" cy="620" r="3"/>
+        <circle cx="440" cy="540" r="2.5"/>
+        <circle cx="620" cy="680" r="3"/>
+        <circle cx="800" cy="560" r="2.5"/>
+        <circle cx="980" cy="700" r="3"/>
+      </g>
+    </svg>
+
     <div class="hero-shapes">
       <div class="shape shape-1" data-parallax-speed="0.5"></div>
       <div class="shape shape-2" data-parallax-speed="0.3"></div>
@@ -48,15 +79,15 @@
       <div class="hero-text" data-parallax-speed="0.1">
         <div class="hero-eyebrow reveal">
           <span class="hero-eyebrow-line"></span>
-          <span>Portfolio · 2026</span>
+          <span>Data Scientist · AI Engineer in training · 2026</span>
         </div>
         <h1 class="hero-title">
-          <span class="hero-title-line reveal">BUILDING</span>
+          <span class="hero-title-line reveal">TRAINING</span>
           <span class="hero-title-line reveal hero-title-accent">
-            SYSTEMS<span class="hero-title-dot">.</span>
+            MODELS<span class="hero-title-dot">.</span>
           </span>
           <span class="hero-title-line reveal">SHIPPING</span>
-          <span class="hero-title-line reveal hero-title-outline">SOFTWARE.</span>
+          <span class="hero-title-line reveal hero-title-outline">INTELLIGENCE.</span>
         </h1>
         <p class="hero-lede reveal">
           I'm <strong>{{ profile.name }}</strong> — {{ profile.tagline }}
@@ -67,12 +98,12 @@
             <span class="hero-meta-val">R&amp;D Intern · Rythmos DB</span>
           </div>
           <div class="hero-meta-item">
-            <span class="hero-meta-label">Based</span>
-            <span class="hero-meta-val">Manila, PH</span>
+            <span class="hero-meta-label">Focus</span>
+            <span class="hero-meta-val">Data · ML · Agentic AI</span>
           </div>
           <div class="hero-meta-item">
-            <span class="hero-meta-label">Focus</span>
-            <span class="hero-meta-val">Data · AI · Full-stack</span>
+            <span class="hero-meta-label">Toolkit</span>
+            <span class="hero-meta-val">Python · Pandas · Claude</span>
           </div>
         </div>
       </div>
@@ -96,32 +127,61 @@
       </div>
     </div>
 
-    <!-- SKILLS STRIP -->
+    <!-- FOCUS AREAS -->
+    <div class="focus-wrap">
+      <div class="focus-header">
+        <div class="section-index">01 · FOCUS AREAS</div>
+        <h2 class="skills-heading">Where I spend my energy.</h2>
+      </div>
+      <div class="focus-grid">
+        {% for f in focus_areas %}
+          <div class="focus-card reveal">
+            <div class="focus-card-head">
+              <span class="focus-card-tag">{{ f.tag }}</span>
+              <span class="focus-card-dot"></span>
+            </div>
+            <div class="focus-card-name">{{ f.name }}</div>
+            <div class="focus-card-blurb">{{ f.blurb }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- SKILLS MATRIX -->
     <div class="skills-wrap">
       <div class="skills-header">
-        <div class="section-index">01 · TOOLKIT</div>
-        <h2 class="skills-heading">Technical &amp; soft skills, combined.</h2>
+        <div class="section-index">02 · TOOLKIT</div>
+        <h2 class="skills-heading">From ingest to insight — the stack.</h2>
       </div>
 
       <div class="skills-grid">
         <div class="skills-col">
           <div class="skills-col-head">
             <span class="skills-col-tag">/ technical</span>
-            <span class="skills-col-count">{{ technical_skills|length }}</span>
+            <span class="skills-col-count">{{ total_technical }} items</span>
           </div>
-          <div class="skill-chips">
-            {% for s in technical_skills %}
-              <span class="skill-chip" data-group="{{ s.group|lower }}">
-                <span class="skill-chip-name">{{ s.name }}</span>
-                <span class="skill-chip-group">{{ s.group }}</span>
-              </span>
+
+          <div class="skill-matrix">
+            {% for group in skill_groups %}
+              <div class="skill-group">
+                <div class="skill-group-head">
+                  <span class="skill-group-tag">{{ group.tag }}</span>
+                  <span class="skill-group-name">{{ group.name }}</span>
+                  <span class="skill-group-count">{{ group.items|length }}</span>
+                </div>
+                <div class="skill-chips">
+                  {% for item in group.items %}
+                    <span class="skill-chip skill-chip-{{ group.name|slugify }}">{{ item }}</span>
+                  {% endfor %}
+                </div>
+              </div>
             {% endfor %}
           </div>
         </div>
 
         <div class="skills-col">
           <div class="skills-col-head">
-            <span class="skills-col-tag">/ soft</span>
+            <span class="skills-col-tag">/ approach</span>
             <span class="skills-col-count">{{ soft_skills|length }}</span>
           </div>
           <div class="soft-list">
@@ -147,7 +207,7 @@
   ═════════════════════════════════════════════════════════════════ -->
   <section id="ojt" class="ojt">
     <div class="ojt-header">
-      <div class="section-index">02 · INTERNSHIP</div>
+      <div class="section-index">03 · INTERNSHIP</div>
       <h2 class="section-heading">
         {{ experience.role }}<br />
         <span class="section-heading-accent">@ {{ experience.company }}</span>
@@ -227,7 +287,7 @@
   ═════════════════════════════════════════════════════════════════ -->
   <section id="projects" class="projects">
     <div class="projects-header">
-      <div class="section-index">03 · BODY OF WORK</div>
+      <div class="section-index">04 · BODY OF WORK</div>
       <h2 class="section-heading">
         Projects,<br />
         <span class="section-heading-accent">shipped.</span>
@@ -294,7 +354,7 @@
     <div id="contact" class="contact reveal">
       <div class="contact-grid">
         <div class="contact-lead">
-          <div class="section-index">04 · REACH OUT</div>
+          <div class="section-index">05 · REACH OUT</div>
           <h2 class="contact-heading">Let's build<br/>something.</h2>
         </div>
 

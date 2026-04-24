@@ -205,6 +205,19 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.6;
 }
 
+.hero-nodes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+  will-change: transform;
+}
+
 .hero-shapes {
   position: absolute;
   inset: 0;
@@ -412,12 +425,125 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ──────────────────────────────────────────────────────────────────
-   SKILLS
+   FOCUS AREAS
 ───────────────────────────────────────────────────────────────── */
-.skills-wrap {
+.focus-wrap {
   max-width: 1400px;
   margin: clamp(4rem, 10vw, 8rem) auto 0;
   padding-top: 4rem;
+  border-top: 1px solid var(--line);
+}
+.focus-header {
+  margin-bottom: 2.2rem;
+}
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+}
+.focus-card {
+  position: relative;
+  padding: 1.5rem 1.4rem 1.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(212,183,61,0.04), transparent 70%),
+    var(--bg-soft);
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+}
+.focus-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s var(--ease);
+}
+.focus-card:hover {
+  border-color: rgba(212,183,61,0.4);
+  transform: translateY(-3px);
+}
+.focus-card:hover::before { transform: scaleY(1); }
+.focus-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.focus-card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.focus-card-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--olive-bright);
+  box-shadow: 0 0 10px var(--olive-bright);
+  opacity: 0.8;
+}
+.focus-card-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+.focus-card-blurb {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SKILLS MATRIX
+───────────────────────────────────────────────────────────────── */
+.skill-matrix {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.skill-group-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--line);
+}
+.skill-group-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.skill-group-name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.skill-group-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--ink-mute);
+}
+
+/* Category-specific chip tints */
+.skill-chip-data-ml  { border-color: rgba(212,183,61,0.35); background: rgba(212,183,61,0.06); }
+.skill-chip-ai-llms  { border-color: rgba(160,174,90,0.35); background: rgba(160,174,90,0.06); }
+
+.skills-wrap {
+  max-width: 1400px;
+  margin: clamp(2.2rem, 5vw, 4rem) auto 0;
+  padding-top: 3.5rem;
   border-top: 1px solid var(--line);
 }
 .skills-header {
