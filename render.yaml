@@ -1,0 +1,33 @@
+services:
+  # ── Django portfolio site ────────────────────────────────────────
+  - type: web
+    name: neo-portfolio
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "neo-portfolio.onrender.com"
+      - key: DJANGO_CSRF_TRUSTED
+        value: "https://neo-portfolio.onrender.com"
+      - key: STREAMLIT_URL
+        value: "https://neo-portfolio-rdb.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+  # ── Streamlit RDB demo ──────────────────────────────────────────
+  - type: web
+    name: neo-portfolio-rdb
+    runtime: python
+    plan: free
+    rootDir: rdb_demo
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "streamlit run app.py --server.port=$PORT --server.address=0.0.0.0 --server.enableCORS=false --server.enableXsrfProtection=false --browser.gatherUsageStats=false"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"

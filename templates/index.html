@@ -1,0 +1,338 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of {{ profile.name }} — Computer Science student, Data Science specialization." />
+  <title>{{ profile.name }} — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="scroll-progress"><div class="scroll-progress-bar" id="scroll-progress-bar"></div></div>
+
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-brand">
+      <span class="nav-brand-dot"></span>
+      <span>N.B.</span>
+    </a>
+    <div class="nav-links">
+      <a href="#hero">Intro</a>
+      <a href="#ojt">OJT</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="{% static 'docs/Neo_Balignasay_Resume.pdf' %}" class="nav-cta" target="_blank" rel="noopener">
+      Resume <span>↗</span>
+    </a>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 1 — HERO / INTRO
+  ═════════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero-bg-layer hero-bg-far" data-parallax-speed="0.15"></div>
+    <div class="hero-bg-layer hero-bg-mid" data-parallax-speed="0.35"></div>
+
+    <div class="hero-shapes">
+      <div class="shape shape-1" data-parallax-speed="0.5"></div>
+      <div class="shape shape-2" data-parallax-speed="0.3"></div>
+      <div class="shape shape-3" data-parallax-speed="0.7"></div>
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-text" data-parallax-speed="0.1">
+        <div class="hero-eyebrow reveal">
+          <span class="hero-eyebrow-line"></span>
+          <span>Portfolio · 2026</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="hero-title-line reveal">BUILDING</span>
+          <span class="hero-title-line reveal hero-title-accent">
+            SYSTEMS<span class="hero-title-dot">.</span>
+          </span>
+          <span class="hero-title-line reveal">SHIPPING</span>
+          <span class="hero-title-line reveal hero-title-outline">SOFTWARE.</span>
+        </h1>
+        <p class="hero-lede reveal">
+          I'm <strong>{{ profile.name }}</strong> — {{ profile.tagline }}
+        </p>
+        <div class="hero-meta reveal">
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Now</span>
+            <span class="hero-meta-val">R&amp;D Intern · Rythmos DB</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Based</span>
+            <span class="hero-meta-val">Manila, PH</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-label">Focus</span>
+            <span class="hero-meta-val">Data · AI · Full-stack</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-portrait reveal" data-tilt>
+        <div class="portrait-frame">
+          <div class="portrait-layer portrait-back"></div>
+          <div class="portrait-layer portrait-glow"></div>
+          <div class="portrait-layer portrait-accent"></div>
+          <img
+            src="{% static 'img/headshot.png' %}"
+            alt="Neo Genesis Balignasay"
+            class="portrait-img"
+            data-tilt-layer="foreground"
+          />
+          <div class="portrait-badge">
+            <span class="portrait-badge-dot"></span>
+            <span>Available Jun 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS STRIP -->
+    <div class="skills-wrap">
+      <div class="skills-header">
+        <div class="section-index">01 · TOOLKIT</div>
+        <h2 class="skills-heading">Technical &amp; soft skills, combined.</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skills-col">
+          <div class="skills-col-head">
+            <span class="skills-col-tag">/ technical</span>
+            <span class="skills-col-count">{{ technical_skills|length }}</span>
+          </div>
+          <div class="skill-chips">
+            {% for s in technical_skills %}
+              <span class="skill-chip" data-group="{{ s.group|lower }}">
+                <span class="skill-chip-name">{{ s.name }}</span>
+                <span class="skill-chip-group">{{ s.group }}</span>
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="skills-col">
+          <div class="skills-col-head">
+            <span class="skills-col-tag">/ soft</span>
+            <span class="skills-col-count">{{ soft_skills|length }}</span>
+          </div>
+          <div class="soft-list">
+            {% for s in soft_skills %}
+              <div class="soft-item">
+                <div class="soft-item-name">{{ s.name }}</div>
+                <div class="soft-item-blurb">{{ s.blurb }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#ojt" class="scroll-cue" aria-label="Scroll to OJT">
+      <span>Scroll</span>
+      <span class="scroll-cue-line"></span>
+    </a>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 2 — OJT EXPERIENCE
+  ═════════════════════════════════════════════════════════════════ -->
+  <section id="ojt" class="ojt">
+    <div class="ojt-header">
+      <div class="section-index">02 · INTERNSHIP</div>
+      <h2 class="section-heading">
+        {{ experience.role }}<br />
+        <span class="section-heading-accent">@ {{ experience.company }}</span>
+      </h2>
+      <div class="section-sub">{{ experience.period }}</div>
+    </div>
+
+    <div class="ojt-grid">
+      <div class="ojt-left reveal">
+        <div class="cert-stack" data-tilt>
+          <div class="cert-frame">
+            <img
+              src="{% static 'img/certificate_handoff.png' %}"
+              alt="Certificate of completion handoff"
+              class="cert-img"
+            />
+          </div>
+          <div class="cert-caption">
+            <span class="cert-caption-tag">CERT · 2026</span>
+            <span class="cert-caption-text">
+              Certificate of Completion handoff — end of my three-month
+              internship at Rythmos DB.
+            </span>
+          </div>
+        </div>
+
+        <ul class="ojt-bullets">
+          {% for b in experience.bullets %}
+            <li class="reveal">
+              <span class="ojt-bullet-marker">✦</span>
+              <span>{{ b }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="ojt-right reveal">
+        <div class="embed-header">
+          <div class="embed-header-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="embed-header-title">RDB App · live demo</div>
+          <a
+            href="{{ STREAMLIT_URL }}"
+            target="_blank"
+            rel="noopener"
+            class="embed-header-open"
+            aria-label="Open in new tab"
+          >↗</a>
+        </div>
+
+        <div class="embed-wrap">
+          <iframe
+            src="{{ STREAMLIT_URL }}?embed=true"
+            title="RDB App Live Demo"
+            class="embed-iframe"
+            loading="lazy"
+            allow="clipboard-write"
+          ></iframe>
+          <div class="embed-loading">
+            <div class="embed-loading-spinner"></div>
+            <span>Booting demo…</span>
+          </div>
+        </div>
+
+        <div class="embed-caption">
+          <span class="embed-caption-tag">DEMO</span>
+          Stubbed authentication, no external DB, interactive UI. The full
+          production build uses MongoDB-backed auth with bcrypt + audit logs.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 3 — PROJECTS + CONTACT
+  ═════════════════════════════════════════════════════════════════ -->
+  <section id="projects" class="projects">
+    <div class="projects-header">
+      <div class="section-index">03 · BODY OF WORK</div>
+      <h2 class="section-heading">
+        Projects,<br />
+        <span class="section-heading-accent">shipped.</span>
+      </h2>
+    </div>
+
+    <div class="project-list">
+      {% for p in projects %}
+        <article class="project-card reveal" data-tilt data-project="{{ p.slug }}">
+          <div class="project-card-layer project-card-bg"></div>
+          <div class="project-card-inner">
+            <div class="project-card-head">
+              <span class="project-card-index">0{{ forloop.counter }}</span>
+              <span class="project-card-role">{{ p.role }}</span>
+            </div>
+
+            {% if p.image %}
+              <div class="project-card-media">
+                <img src="{% static p.image %}" alt="{{ p.title }} preview" />
+              </div>
+            {% endif %}
+
+            <h3 class="project-card-title">{{ p.title }}</h3>
+            <p class="project-card-desc">{{ p.description }}</p>
+
+            <div class="project-card-stack">
+              {% for t in p.stack %}
+                <span class="project-card-tag">{{ t }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="project-card-foot">
+              <span class="project-card-highlight">{{ p.highlight }}</span>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <!-- EDUCATION + CERTIFICATIONS -->
+    <div class="credentials-grid">
+      <div class="credentials-col reveal">
+        <div class="credentials-col-head">EDUCATION</div>
+        {% for e in education %}
+          <div class="credentials-item">
+            <div class="credentials-item-main">{{ e.school }}</div>
+            <div class="credentials-item-period">{{ e.period }}</div>
+            <div class="credentials-item-detail">{{ e.detail }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="credentials-col reveal">
+        <div class="credentials-col-head">CERTIFICATIONS</div>
+        {% for c in certifications %}
+          <div class="credentials-item">
+            <div class="credentials-item-main">{{ c.name }}</div>
+            <div class="credentials-item-period">{{ c.date }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div id="contact" class="contact reveal">
+      <div class="contact-grid">
+        <div class="contact-lead">
+          <div class="section-index">04 · REACH OUT</div>
+          <h2 class="contact-heading">Let's build<br/>something.</h2>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:{{ profile.email }}" class="contact-link">
+            <span class="contact-link-label">EMAIL</span>
+            <span class="contact-link-val">{{ profile.email }}</span>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="tel:+63{{ profile.phone }}" class="contact-link">
+            <span class="contact-link-label">PHONE</span>
+            <span class="contact-link-val">{{ profile.phone }}</span>
+            <span class="contact-link-arrow">→</span>
+          </a>
+          <a href="{{ profile.linkedin }}" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-label">LINKEDIN</span>
+            <span class="contact-link-val">/in/neo-balignasay</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+          <a href="{{ profile.github }}" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-label">GITHUB</span>
+            <span class="contact-link-val">/kidisakid</span>
+            <span class="contact-link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-left">© 2026 {{ profile.name }}</div>
+        <div class="footer-right">
+          <span>Built with Django + raw CSS/JS</span>
+          <span class="footer-dot">·</span>
+          <span>Deployed on Render</span>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
